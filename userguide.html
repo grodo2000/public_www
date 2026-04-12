@@ -38,6 +38,23 @@
         section {
             margin-bottom: 30px;
         }
+
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .image-gallery img {
+            width: 140px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            object-fit: cover;
+            background: #fff;
+        }
     </style>
 </head>
 <body>
@@ -52,7 +69,10 @@
         <h2>Create Account</h2>
         <p>
             To start using the application, you need to create an account. 
-            
+            <div class="image-gallery">
+                <img src="images/MainScreen.jpg" alt="Screen 1">
+
+            </div>
         </p>
     </section>
 
