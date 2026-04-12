@@ -40,10 +40,7 @@
         color: #1f2a37;
     }
 
-    /* =========================
-       PRO SLIDER (SCROLL SNAP)
-    ========================== */
-
+    /* PRO SLIDER (SCROLL SNAP) */
     .slider-wrapper {
         margin-top: 20px;
         overflow-x: auto;
@@ -96,7 +93,6 @@
         text-align: center;
     }
 
-    /* Controls */
     .controls {
         display: flex;
         justify-content: center;
@@ -117,7 +113,6 @@
         transform: scale(0.97);
     }
 
-    /* Dots */
     .dots {
         display: flex;
         justify-content: center;
@@ -135,6 +130,17 @@
     .dot.active {
         background: #1f2a37;
     }
+
+    /* NEW INFO BOX */
+    .after-create-note {
+        margin-top: 25px;
+        padding: 12px 15px;
+        background: #eef2ff;
+        border-radius: 10px;
+        font-size: 14px;
+        color: #1f2a37;
+        text-align: center;
+    }
 </style>
 </head>
 
@@ -147,7 +153,7 @@
 <main>
 
 <section>
-    <h2>Create Account</h2>
+    <h2>How to - Create Account</h2>
     <p>Follow steps below.</p>
 
     <div class="slider-wrapper" id="slider">
@@ -161,7 +167,7 @@
         <div class="slide">
             <img src="images/SignUp_2_ChooseYourDisplayName.jpg">
             <h3>Step 2</h3>
-            <p>Choose username</p>
+            <p>Choose your username. This will be visible to everyone, so make sure you don’t include sensitive information.</p>
         </div>
 
         <div class="slide">
@@ -173,19 +179,19 @@
         <div class="slide">
             <img src="images/SignUp_4_ProvideSport.jpg">
             <h3>Step 4</h3>
-            <p>Select sport</p>
+            <p>Select your sport to connect with players / coaches in that category.</p>
         </div>
 
         <div class="slide">
             <img src="images/SignUp_5_ProvideRole.jpg">
             <h3>Step 5</h3>
-            <p>Choose role</p>
+            <p>Choose your role: coach or player.</p>
         </div>
 
         <div class="slide">
             <img src="images/SignUp_6_AcceptTerms.jpg">
             <h3>Step 6</h3>
-            <p>Accept terms</p>
+            <p>By continuing, you agree to the Terms of Use</p>
         </div>
 
         <div class="slide">
@@ -202,6 +208,11 @@
     </div>
 
     <div class="dots" id="dots"></div>
+
+    <div class="after-create-note">
+        After creating your account, you will be redirected to the settings screen.
+    </div>
+
 </section>
 
 </main>
@@ -213,7 +224,6 @@ const total = slides.length;
 
 let index = 0;
 
-// dots
 const dotsContainer = document.getElementById("dots");
 
 for (let i = 0; i < total; i++) {
@@ -245,7 +255,6 @@ function prev() {
     goTo(index - 1);
 }
 
-// detect manual scroll (mobile swipe)
 slider.addEventListener("scroll", () => {
     const newIndex = Math.round(slider.scrollLeft / slider.clientWidth);
     if (newIndex !== index) {
