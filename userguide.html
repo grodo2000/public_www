@@ -33,14 +33,17 @@
     }
 
     section {
-        margin-bottom: 40px;
+        margin-bottom: 60px;
     }
 
     h1, h2 {
         color: #1f2a37;
     }
 
-    /* PRO SLIDER (SCROLL SNAP) */
+    /* =========================
+       PRO SLIDER BASE
+    ========================== */
+
     .slider-wrapper {
         margin-top: 20px;
         overflow-x: auto;
@@ -48,7 +51,6 @@
         -webkit-overflow-scrolling: touch;
 
         display: flex;
-        gap: 0;
 
         border-radius: 12px;
         background: #f9fafb;
@@ -71,6 +73,7 @@
 
         padding: 20px;
         min-height: 340px;
+        text-align: center;
     }
 
     .slide img {
@@ -90,9 +93,9 @@
         margin: 0;
         font-size: 14px;
         color: #666;
-        text-align: center;
     }
 
+    /* controls */
     .controls {
         display: flex;
         justify-content: center;
@@ -131,15 +134,9 @@
         background: #1f2a37;
     }
 
-    /* NEW INFO BOX */
-    .after-create-note {
-        margin-top: 25px;
-        padding: 12px 15px;
-        background: #eef2ff;
-        border-radius: 10px;
-        font-size: 14px;
-        color: #1f2a37;
-        text-align: center;
+    /* section spacing */
+    .section-title {
+        margin-bottom: 10px;
     }
 </style>
 </head>
@@ -152,11 +149,14 @@
 
 <main>
 
+<!-- =========================
+     SIGNUP SLIDER
+========================= -->
 <section>
     <h2>How to - Create Account</h2>
     <p>Follow steps below.</p>
 
-    <div class="slider-wrapper" id="slider">
+    <div class="slider-wrapper signup-slider" id="slider1">
 
         <div class="slide">
             <img src="images/SignUp_1_CountrySelection.jpg">
@@ -167,7 +167,7 @@
         <div class="slide">
             <img src="images/SignUp_2_ChooseYourDisplayName.jpg">
             <h3>Step 2</h3>
-            <p>Choose your username. This will be visible to everyone, so make sure you don’t include sensitive information.</p>
+            <p>Choose username (public visibility warning included earlier)</p>
         </div>
 
         <div class="slide">
@@ -179,19 +179,19 @@
         <div class="slide">
             <img src="images/SignUp_4_ProvideSport.jpg">
             <h3>Step 4</h3>
-            <p>Select your sport to connect with players / coaches in that category.</p>
+            <p>Select sport to connect with players and coaches</p>
         </div>
 
         <div class="slide">
             <img src="images/SignUp_5_ProvideRole.jpg">
             <h3>Step 5</h3>
-            <p>Choose your role: coach or player.</p>
+            <p>Choose role: coach or player</p>
         </div>
 
         <div class="slide">
             <img src="images/SignUp_6_AcceptTerms.jpg">
             <h3>Step 6</h3>
-            <p>By continuing, you agree to the Terms of Use</p>
+            <p>Agree to Terms of Use</p>
         </div>
 
         <div class="slide">
@@ -203,67 +203,135 @@
     </div>
 
     <div class="controls">
-        <button onclick="prev()">Previous</button>
-        <button onclick="next()">Next</button>
+        <button onclick="prev(1)">Previous</button>
+        <button onclick="next(1)">Next</button>
     </div>
 
-    <div class="dots" id="dots"></div>
+    <div class="dots" id="dots1"></div>
 
-    <div class="after-create-note">
-        After creating your account, you will be redirected to the settings screen.
+    <p style="margin-top:15px; font-size:14px; color:#555;">
+        After creating your account, you will be redirected to the preferences screen.
+    </p>
+</section>
+
+
+<!-- =========================
+     SETTINGS SLIDER (NEW)
+========================= -->
+<section>
+    <h2>Preferences Overview</h2>
+    <p>Learn how to manage your preferences</p>
+
+    <div class="slider-wrapper settings-slider" id="slider2">
+
+        <div class="slide">
+            <img src="images/Preferences_Empty.jpg">
+            <h3>Preferences</h3>
+            <p>Edit your personal information and avatar</p>
+        </div>
+
+        <div class="slide">
+            <img src="images/Preferences_SelectLocation.jpg">
+            <h3>Selecting location where you want to train/coach</h3>
+            <p>Select the Canton first, then the Club name</p>
+        </div>
+
+        <div class="slide">
+            <img src="images/Preferences_AddedLocation.jpg">
+            <h3>Add Training Location</h3>
+            <p>Add selected Club by clicking the "Add Location" button</p>
+        </div>
+
+        <div class="slide">
+            <img src="images/Preferences_Added2Location.jpg">
+            <h3>Multiple Clubs</h3>
+            <p>It is possible to add up to 5 Clubs/Training Locations</p>
+        </div>
+
     </div>
 
+    <div class="controls">
+        <button onclick="prev(2)">Previous</button>
+        <button onclick="next(2)">Next</button>
+    </div>
+
+    <div class="dots" id="dots2"></div>
 </section>
 
 </main>
 
 <script>
-const slider = document.getElementById("slider");
-const slides = document.querySelectorAll(".slide");
-const total = slides.length;
+const sliders = {
+    1: {
+        el: document.getElementById("slider1"),
+        index: 0,
+        dots: document.getElementById("dots1")
+    },
+    2: {
+        el: document.getElementById("slider2"),
+        index: 0,
+        dots: document.getElementById("dots2")
+    }
+};
 
-let index = 0;
+function initDots(id) {
+    const slider = sliders[id];
+    const slides = slider.el.querySelectorAll(".slide");
 
-const dotsContainer = document.getElementById("dots");
-
-for (let i = 0; i < total; i++) {
-    const dot = document.createElement("div");
-    dot.classList.add("dot");
-    dotsContainer.appendChild(dot);
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        slider.dots.appendChild(dot);
+    }
 }
 
-const dots = document.querySelectorAll(".dot");
+initDots(1);
+initDots(2);
 
-function updateDots() {
+function update(id) {
+    const slider = sliders[id];
+    const slides = slider.el.querySelectorAll(".slide");
+    const dots = slider.dots.querySelectorAll(".dot");
+
+    const index = slider.index;
+
+    slider.el.scrollTo({
+        left: index * slider.el.clientWidth,
+        behavior: "smooth"
+    });
+
     dots.forEach((d, i) => d.classList.toggle("active", i === index));
 }
 
-function goTo(i) {
-    index = (i + total) % total;
-    slider.scrollTo({
-        left: index * slider.clientWidth,
-        behavior: "smooth"
+function next(id) {
+    const slider = sliders[id];
+    const slides = slider.el.querySelectorAll(".slide");
+
+    slider.index = (slider.index + 1) % slides.length;
+    update(id);
+}
+
+function prev(id) {
+    const slider = sliders[id];
+    const slides = slider.el.querySelectorAll(".slide");
+
+    slider.index = (slider.index - 1 + slides.length) % slides.length;
+    update(id);
+}
+
+["slider1", "slider2"].forEach((_, i) => {
+    const id = i + 1;
+    const slider = sliders[id];
+
+    slider.el.addEventListener("scroll", () => {
+        const newIndex = Math.round(slider.el.scrollLeft / slider.el.clientWidth);
+        if (newIndex !== slider.index) {
+            slider.index = newIndex;
+            const dots = slider.dots.querySelectorAll(".dot");
+            dots.forEach((d, i) => d.classList.toggle("active", i === newIndex));
+        }
     });
-    updateDots();
-}
-
-function next() {
-    goTo(index + 1);
-}
-
-function prev() {
-    goTo(index - 1);
-}
-
-slider.addEventListener("scroll", () => {
-    const newIndex = Math.round(slider.scrollLeft / slider.clientWidth);
-    if (newIndex !== index) {
-        index = newIndex;
-        updateDots();
-    }
 });
-
-updateDots();
 </script>
 
 </body>
