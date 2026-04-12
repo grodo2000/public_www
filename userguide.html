@@ -41,7 +41,7 @@
     }
 
     /* =========================
-       PRO SLIDER BASE
+       SLIDER BASE (PRO)
     ========================== */
 
     .slider-wrapper {
@@ -51,7 +51,6 @@
         -webkit-overflow-scrolling: touch;
 
         display: flex;
-
         border-radius: 12px;
         background: #f9fafb;
 
@@ -82,7 +81,6 @@
         border-radius: 18px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         margin-bottom: 15px;
-        display: block;
     }
 
     .slide h3 {
@@ -133,11 +131,6 @@
     .dot.active {
         background: #1f2a37;
     }
-
-    /* section spacing */
-    .section-title {
-        margin-bottom: 10px;
-    }
 </style>
 </head>
 
@@ -156,7 +149,7 @@
     <h2>How to - Create Account</h2>
     <p>Follow steps below.</p>
 
-    <div class="slider-wrapper signup-slider" id="slider1">
+    <div class="slider-wrapper" id="slider1">
 
         <div class="slide">
             <img src="images/SignUp_1_CountrySelection.jpg">
@@ -167,7 +160,7 @@
         <div class="slide">
             <img src="images/SignUp_2_ChooseYourDisplayName.jpg">
             <h3>Step 2</h3>
-            <p>Choose username (public visibility warning included earlier)</p>
+            <p>Choose username</p>
         </div>
 
         <div class="slide">
@@ -185,13 +178,13 @@
         <div class="slide">
             <img src="images/SignUp_5_ProvideRole.jpg">
             <h3>Step 5</h3>
-            <p>Choose role: coach or player</p>
+            <p>Choose role</p>
         </div>
 
         <div class="slide">
             <img src="images/SignUp_6_AcceptTerms.jpg">
             <h3>Step 6</h3>
-            <p>Agree to Terms of Use</p>
+            <p>Accept Terms of Use</p>
         </div>
 
         <div class="slide">
@@ -209,43 +202,43 @@
 
     <div class="dots" id="dots1"></div>
 
-    <p style="margin-top:15px; font-size:14px; color:#555;">
+    <h2>
         After creating your account, you will be redirected to the preferences screen.
-    </p>
+    </h2>
 </section>
 
 
 <!-- =========================
-     SETTINGS SLIDER (NEW)
+     PREFERENCES SLIDER
 ========================= -->
 <section>
     <h2>Preferences Overview</h2>
     <p>Learn how to manage your preferences</p>
 
-    <div class="slider-wrapper settings-slider" id="slider2">
+    <div class="slider-wrapper" id="slider2">
 
         <div class="slide">
             <img src="images/Preferences_Empty.jpg">
             <h3>Preferences</h3>
-            <p>Edit your personal information and avatar</p>
+            <p>Set your training preferences (location, price etc.)</p>
         </div>
 
         <div class="slide">
             <img src="images/Preferences_SelectLocation.jpg">
-            <h3>Selecting location where you want to train/coach</h3>
-            <p>Select the Canton first, then the Club name</p>
+            <h3>Select Location</h3>
+            <p>Choose canton and club</p>
         </div>
 
         <div class="slide">
             <img src="images/Preferences_AddedLocation.jpg">
-            <h3>Add Training Location</h3>
-            <p>Add selected Club by clicking the "Add Location" button</p>
+            <h3>Add Location</h3>
+            <p>Click “Add Location” to save</p>
         </div>
 
         <div class="slide">
             <img src="images/Preferences_Added2Location.jpg">
-            <h3>Multiple Clubs</h3>
-            <p>It is possible to add up to 5 Clubs/Training Locations</p>
+            <h3>Multiple Locations</h3>
+            <p>You can add up to 5 training locations</p>
         </div>
 
     </div>
@@ -256,81 +249,124 @@
     </div>
 
     <div class="dots" id="dots2"></div>
+
+    <h2>
+        After confirming your preferences, the main app screen will appear.
+    </h2>
+</section>
+
+
+<!-- =========================
+     MAIN APP PREVIEW SLIDER
+========================= -->
+<section>
+    <h2>Main App Overview</h2>
+    <p>Overview of the main application screens</p>
+
+    <div class="slider-wrapper" id="slider3">
+
+        <div class="slide">
+            <img src="images/App_Home.jpg">
+            <h3>Home</h3>
+            <p>View activity and updates</p>
+        </div>
+
+        <div class="slide">
+            <img src="images/App_Search.jpg">
+            <h3>Search</h3>
+            <p>Find players, coaches and clubs</p>
+        </div>
+
+        <div class="slide">
+            <img src="images/App_Messages.jpg">
+            <h3>Messages</h3>
+            <p>Chat with other users</p>
+        </div>
+
+        <div class="slide">
+            <img src="images/App_Profile.jpg">
+            <h3>Profile</h3>
+            <p>Manage your account and stats</p>
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <button onclick="prev(3)">Previous</button>
+        <button onclick="next(3)">Next</button>
+    </div>
+
+    <div class="dots" id="dots3"></div>
 </section>
 
 </main>
 
 <script>
 const sliders = {
-    1: {
-        el: document.getElementById("slider1"),
-        index: 0,
-        dots: document.getElementById("dots1")
-    },
-    2: {
-        el: document.getElementById("slider2"),
-        index: 0,
-        dots: document.getElementById("dots2")
-    }
+    1: { el: document.getElementById("slider1"), index: 0, dots: document.getElementById("dots1") },
+    2: { el: document.getElementById("slider2"), index: 0, dots: document.getElementById("dots2") },
+    3: { el: document.getElementById("slider3"), index: 0, dots: document.getElementById("dots3") }
 };
 
 function initDots(id) {
-    const slider = sliders[id];
-    const slides = slider.el.querySelectorAll(".slide");
+    const s = sliders[id];
+    const slides = s.el.querySelectorAll(".slide");
 
     for (let i = 0; i < slides.length; i++) {
         const dot = document.createElement("div");
         dot.classList.add("dot");
-        slider.dots.appendChild(dot);
+        s.dots.appendChild(dot);
     }
 }
 
-initDots(1);
-initDots(2);
-
 function update(id) {
-    const slider = sliders[id];
-    const slides = slider.el.querySelectorAll(".slide");
-    const dots = slider.dots.querySelectorAll(".dot");
+    const s = sliders[id];
+    const dots = s.dots.querySelectorAll(".dot");
 
-    const index = slider.index;
+    const width = s.el.offsetWidth;
 
-    slider.el.scrollTo({
-        left: index * slider.el.clientWidth,
+    s.el.scrollTo({
+        left: s.index * width,
         behavior: "smooth"
     });
 
-    dots.forEach((d, i) => d.classList.toggle("active", i === index));
+    dots.forEach((d, i) => d.classList.toggle("active", i === s.index));
 }
 
 function next(id) {
-    const slider = sliders[id];
-    const slides = slider.el.querySelectorAll(".slide");
+    const s = sliders[id];
+    const slides = s.el.querySelectorAll(".slide");
 
-    slider.index = (slider.index + 1) % slides.length;
+    s.index = (s.index + 1) % slides.length;
     update(id);
 }
 
 function prev(id) {
-    const slider = sliders[id];
-    const slides = slider.el.querySelectorAll(".slide");
+    const s = sliders[id];
+    const slides = s.el.querySelectorAll(".slide");
 
-    slider.index = (slider.index - 1 + slides.length) % slides.length;
+    s.index = (s.index - 1 + slides.length) % slides.length;
     update(id);
 }
 
-["slider1", "slider2"].forEach((_, i) => {
-    const id = i + 1;
-    const slider = sliders[id];
+function bindScroll(id) {
+    const s = sliders[id];
 
-    slider.el.addEventListener("scroll", () => {
-        const newIndex = Math.round(slider.el.scrollLeft / slider.el.clientWidth);
-        if (newIndex !== slider.index) {
-            slider.index = newIndex;
-            const dots = slider.dots.querySelectorAll(".dot");
+    s.el.addEventListener("scroll", () => {
+        const width = s.el.offsetWidth;
+        const newIndex = Math.round(s.el.scrollLeft / width);
+
+        if (newIndex !== s.index) {
+            s.index = newIndex;
+            const dots = s.dots.querySelectorAll(".dot");
             dots.forEach((d, i) => d.classList.toggle("active", i === newIndex));
         }
     });
+}
+
+[1,2,3].forEach(id => {
+    initDots(id);
+    bindScroll(id);
 });
 </script>
 
