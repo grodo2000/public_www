@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- NO INDEX / NO TRACKING -->
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
 
@@ -48,24 +49,21 @@
         border-radius: 12px;
         background: #f9fafb;
         padding: 20px 0;
-
-        min-height: 340px; /* FIX: stabilna wysokość */
+        min-height: 340px;
     }
 
     .slider {
         display: flex;
+        width: 100%;
         transition: transform 0.4s ease;
-        width: 700%; /* 7 slides */
-        will-change: transform; /* FIX: GPU smooth render */
+        will-change: transform;
     }
 
     .slide {
-        width: 100%;
-        flex-shrink: 0;
+        flex: 0 0 100%;
         text-align: center;
         padding: 10px 20px;
-
-        min-height: 320px; /* FIX: stabilność layoutu */
+        min-height: 320px;
     }
 
     .slide img {
@@ -74,7 +72,7 @@
         border-radius: 18px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         margin-bottom: 15px;
-        display: block; /* FIX: render glitch */
+        display: block;
         margin-left: auto;
         margin-right: auto;
     }
@@ -107,7 +105,6 @@
 
     button:disabled {
         background: #aaa;
-        cursor: not-allowed;
     }
 
     .dots {
@@ -155,37 +152,37 @@
             <div class="slide">
                 <img src="images/SignUp_2_ChooseYourDisplayName.jpg" alt="Step 2">
                 <h3>Step 2</h3>
-                <p>Choose your User Name. It will be visible to everybody</p>
+                <p>Choose your username</p>
             </div>
 
             <div class="slide">
                 <img src="images/SignUp_3_ProvideEmail.jpg" alt="Step 3">
                 <h3>Step 3</h3>
-                <p>Provide your email address. We will send you an activation link.</p>
+                <p>Provide your email</p>
             </div>
 
             <div class="slide">
                 <img src="images/SignUp_4_ProvideSport.jpg" alt="Step 4">
                 <h3>Step 4</h3>
-                <p>Choose the sport you are a trainer/player in.</p>
+                <p>Select your sport</p>
             </div>
 
             <div class="slide">
                 <img src="images/SignUp_5_ProvideRole.jpg" alt="Step 5">
                 <h3>Step 5</h3>
-                <p>Select whether you are a Trainer or a Player</p>
+                <p>Choose role</p>
             </div>
 
             <div class="slide">
                 <img src="images/SignUp_6_AcceptTerms.jpg" alt="Step 6">
                 <h3>Step 6</h3>
-                <p>Read and accept the Terms of use</p>
+                <p>Accept terms</p>
             </div>
 
             <div class="slide">
                 <img src="images/SignUp_7_SummaryAndCreate.jpg" alt="Step 7">
                 <h3>Step 7</h3>
-                <p>Verify data and click Create</p>
+                <p>Create account</p>
             </div>
 
         </div>
@@ -202,17 +199,17 @@
 
 <section>
     <h2>Logging In</h2>
-    <p>Use your email and password to log in to your account.</p>
+    <p>Use your email and password to log in.</p>
 </section>
 
 <section>
     <h2>Navigation</h2>
-    <p>Use the bottom menu to switch between app sections.</p>
+    <p>Use the menu to navigate the app.</p>
 </section>
 
 <section>
     <h2>Settings</h2>
-    <p>Manage your account, privacy, and preferences in settings.</p>
+    <p>Manage your account and preferences.</p>
 </section>
 
 </main>
@@ -226,7 +223,6 @@
 
     const dotsContainer = document.getElementById("dots");
 
-    // create dots
     for (let i = 0; i < total; i++) {
         const dot = document.createElement("div");
         dot.classList.add("dot");
@@ -236,7 +232,7 @@
     const dots = document.querySelectorAll(".dot");
 
     function update() {
-        slider.style.transform = `translateX(-${index * (100 / total)}%)`;
+        slider.style.transform = `translateX(-${index * 100}%)`;
         dots.forEach((d, i) => d.classList.toggle("active", i === index));
     }
 
