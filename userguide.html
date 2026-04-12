@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- NO INDEX / NO TRACKING FOR BOTS -->
+    <!-- NO INDEX / NO TRACKING -->
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
     <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
 
@@ -13,50 +13,121 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
-            padding: 0;
-            background: #f7f7f7;
+            background: #f6f7f9;
             color: #333;
         }
+
         header {
-            background: #2c3e50;
+            background: #1f2a37;
             color: white;
             padding: 20px;
             text-align: center;
         }
+
         main {
-            max-width: 800px;
+            max-width: 900px;
             margin: 40px auto;
             background: white;
             padding: 30px;
-            border-radius: 10px;
-        }
-        h1, h2 {
-            color: #2c3e50;
-        }
-        section {
-            margin-bottom: 30px;
+            border-radius: 12px;
         }
 
-        .image-gallery {
+        h1, h2 {
+            color: #1f2a37;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        /* =========================
+           SLIDER
+        ========================== */
+
+        .slider-wrapper {
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #f9fafb;
+            padding: 20px 0;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.4s ease;
+            width: 800%;
+        }
+
+        .slide {
+            width: 100%;
+            flex-shrink: 0;
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .slide img {
+            width: 220px;
+            max-width: 80%;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .slide h3 {
+            margin: 10px 0 5px;
+        }
+
+        .slide p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Buttons */
+        .controls {
             display: flex;
             justify-content: center;
             gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 15px;
         }
-        
-        .image-gallery img {
-            width: 140px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            object-fit: cover;
-            background: #fff;
+
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #1f2a37;
+            color: white;
+        }
+
+        button:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        /* Dots */
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        .dot.active {
+            background: #1f2a37;
         }
     </style>
 </head>
+
 <body>
 
 <header>
@@ -67,40 +138,115 @@
 
     <section>
         <h2>Create Account</h2>
-        <p>
-            To start using the application, you need to create an account. 
-            <div class="image-gallery">
-                <img src="images/MainScreen.jpg" alt="Screen 1">
+        <p>Follow these steps to create your account quickly and securely.</p>
 
+        <div class="slider-wrapper">
+
+            <div class="slider" id="slider">
+
+                <div class="slide">
+                    <img src="images/SignUp_1_CountrySelection.jpg" alt="Step 1">
+                    <h3>Step 1</h3>
+                    <p>Select your country</p>
+                </div>
+
+                <div class="slide">
+                    <img src="images/SignUp_2_ChooseYourDisplayName.jpg" alt="Step 2">
+                    <h3>Step 2</h3>
+                    <p>Choose your User Name. It will be visible to everybody</p>
+                </div>
+
+                <div class="slide">
+                    <img src="images/SignUp_3_ProvideEmail.jpg" alt="Step 3">
+                    <h3>Step 3</h3>
+                    <p>Provide your email address. We will send you an activation link.</p>
+                </div>
+
+                <div class="slide">
+                    <img src="images/SignUp_4_ProvideSport.jpg" alt="Step 4">
+                    <h3>Step 4</h3>
+                    <p>Choose the sport you are a trainer/player in.</p>
+                </div>
+
+                <div class="slide">
+                    <img src="images/SignUp_5_ProvideRole.jpg" alt="Step 5">
+                    <h3>Step 5</h3>
+                    <p>Select whether you are a Trainer or a Player</p>
+                </div>
+
+                <div class="slide">
+                    <img src="images/SignUp_6_AcceptTerms.jpg" alt="Step 6">
+                    <h3>Step 6</h3>
+                    <p>Read and accept the Terms of use</p>
+                </div>
+
+                <div class="slide">
+                    <img src="images/SignUp_7_SummaryAndCreate.jpg" alt="Step 7">
+                    <h3>Step 7</h3>
+                    <p>Verify provided data and click Create to create your account</p>
+                </div>
             </div>
-        </p>
+
+            <div class="controls">
+                <button onclick="prev()">Previous</button>
+                <button onclick="next()">Next</button>
+            </div>
+
+            <div class="dots" id="dots"></div>
+
+        </div>
     </section>
 
     <section>
         <h2>Logging In</h2>
-        <p>
-            After creating your account, you can log in using your email and password. 
-            Tap "Login" on the main screen and enter your credentials.
-        </p>
+        <p>Use your email and password to log in to your account.</p>
     </section>
 
     <section>
-        <h2>Basic Navigation</h2>
-        <p>
-            Use the bottom menu to switch between main sections of the app. 
-            Each icon represents a different feature such as dashboard, settings, or profile.
-        </p>
+        <h2>Navigation</h2>
+        <p>Use the bottom menu to switch between app sections.</p>
     </section>
 
     <section>
         <h2>Settings</h2>
-        <p>
-            In the settings section, you can update your personal information, 
-            change your password, and configure app preferences.
-        </p>
+        <p>Manage your account, privacy, and preferences in settings.</p>
     </section>
 
 </main>
+
+<script>
+    const slider = document.getElementById("slider");
+    const total = 8;
+    let index = 0;
+
+    const dotsContainer = document.getElementById("dots");
+
+    // create dots
+    for (let i = 0; i < total; i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        dotsContainer.appendChild(dot);
+    }
+
+    const dots = document.querySelectorAll(".dot");
+
+    function update() {
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle("active", i === index));
+    }
+
+    function next() {
+        index = (index + 1) % total;
+        update();
+    }
+
+    function prev() {
+        index = (index - 1 + total) % total;
+        update();
+    }
+
+    update();
+</script>
 
 </body>
 </html>
